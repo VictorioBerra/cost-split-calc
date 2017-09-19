@@ -47,7 +47,11 @@ export class SummaryPage {
   }
   
   shareGoogleClick = function () {
-    this.socialShareing.shareVia('google', this.personATotal, this.getSubject());
+    this.socialShareing.shareVia('com.google.android.gms.wallet', this.personATotal, this.getSubject());
+  }
+
+  shareAmazonClick = function () {
+    this.socialShareing.shareVia('amazon', this.personATotal, this.getSubject());
   }
 
 }

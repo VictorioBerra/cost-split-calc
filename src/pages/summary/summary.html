@@ -32,29 +32,36 @@
   <hr>
 
   <ion-grid class="share-buttons">
-      <ion-row>
-        <ion-col col-3>
-            <button ion-button full (click)="shareClick()">
+    <ion-row>
+      <ion-col col-12>
+        <button ion-button full (click)="shareClick()">
                 <ion-icon name="share"></ion-icon>
               </button>
-        </ion-col>
-        <ion-col col-3>
-            <button ion-button full icon-left color="secondary" (click)="shareVenmoClick()">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-3>
+        <button ion-button full icon-left color="secondary" (click)="shareAmazonClick()">
+                  <span>Amazon</span>
+                </button>
+      </ion-col>
+      <ion-col col-3>
+        <button ion-button full icon-left color="secondary" (click)="shareVenmoClick()">
                 <span>Venmo</span>
               </button>
-        </ion-col>
-        <ion-col col-3>
-            <button ion-button full icon-left color="secondary" (click)="sharePaypalClick()">
+      </ion-col>
+      <ion-col col-3>
+        <button ion-button full icon-left color="secondary" (click)="sharePaypalClick()">
                 <span>Paypal</span>
               </button>
-        </ion-col>
-        <ion-col col-3>
-            <button ion-button full icon-left color="secondary" (click)="shareGoogleClick()">
+      </ion-col>
+      <ion-col col-3>
+        <button ion-button full icon-left color="secondary" (click)="shareGoogleClick()">
                 <span>Google</span>
               </button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 
 </ion-content>

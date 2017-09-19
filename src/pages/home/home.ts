@@ -17,18 +17,25 @@ export class HomePage {
 
   calculate = function() {
 
-    var totalWithoutTax = this.totalWithTax / (1 + (this.taxRate / 100));
-    var totalTaxCollected = this.totalWithTax - totalWithoutTax;
+    var totalWithTax =  parseInt(this.totalWithTax, 10);
+    var taxRate = parseInt(this.taxRate, 10);
+    var additA = parseInt(this.additA, 10) || 0;
+    var additB = parseInt(this.additB, 10) || 0;
 
-    var totalLessAdditional = totalWithoutTax - (this.additA || 0) - (this.additB || 0);
+    var totalWithoutTax = totalWithTax / (1 + (taxRate / 100));
+    var totalTaxCollected = totalWithTax - totalWithoutTax;
 
-    var splitDifference = totalWithoutTax / 2;
+    var totalLessAdditional = totalWithoutTax - additA - additB;
+
+    var splitDifference = totalLessAdditional / 2;
 
     // TODO divide tax
 
-    var totalPersonA = (this.additA || 0) + splitDifference;
-    var totalPersonB = (this.additB || 0) + splitDifference;
+    var totalPersonA = additA + splitDifference;
+    var totalPersonB = additB + splitDifference;
     
+    console.log(additA, splitDifference, totalPersonA);
+
     this.navCtrl.push(SummaryPage, {
       personATotal: totalPersonA,
       personBTotal: totalPersonB

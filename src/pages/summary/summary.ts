@@ -19,7 +19,7 @@ export class SummaryPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.personATotal = this.navParams.get('personATotal');
-    this.personATotal = this.navParams.get('personBTotal');
+    this.personBTotal = this.navParams.get('personBTotal');
   }
 
 }

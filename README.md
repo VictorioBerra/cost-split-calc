@@ -3,6 +3,8 @@
 ### Todo:
 - Client validation
 - Share feature
+    - Share with custom message (emoji?)
+    - Shgare per user.
 - Taxes and better summary
 - Saving
 

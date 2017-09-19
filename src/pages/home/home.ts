@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { CostSplitCalculatorProvider } from '../../providers/cost-split-calculator/cost-split-calculator';
 
 import { SummaryPage } from '../summary/summary';
 
@@ -11,35 +12,23 @@ export class HomePage {
 
   total: number = 0;
   taxRate: number = 7.5;
+
+  //debug
+  additA = 40;
+  totalWithTax = 107.5;
+
   //ignoreTax: boolean = false;
   
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController, public calcService: CostSplitCalculatorProvider) {}
 
   calculate = function() {
 
-    var totalWithTax =  parseInt(this.totalWithTax, 10);
-    var taxRate = parseInt(this.taxRate, 10);
-    var additA = parseInt(this.additA, 10) || 0;
-    var additB = parseInt(this.additB, 10) || 0;
+    var totalWithTax: number = + parseFloat(this.totalWithTax).toFixed(2);
+    var taxRate: number = + parseFloat(this.taxRate).toFixed(2);
+    var additA: number = parseInt(this.additA, 10) || 0;
+    var additB: number = parseInt(this.additB, 10) || 0;
 
-    var totalWithoutTax = totalWithTax / (1 + (taxRate / 100));
-    var totalTaxCollected = totalWithTax - totalWithoutTax;
-
-    var totalLessAdditional = totalWithoutTax - additA - additB;
-
-    var splitDifference = totalLessAdditional / 2;
-
-    // TODO divide tax
-
-    var totalPersonA = additA + splitDifference;
-    var totalPersonB = additB + splitDifference;
-    
-    console.log(additA, splitDifference, totalPersonA);
-
-    this.navCtrl.push(SummaryPage, {
-      personATotal: totalPersonA,
-      personBTotal: totalPersonB
-    });
+    this.navCtrl.push(SummaryPage, this.calcService.Calculate(totalWithTax, taxRate, additA, additB));
   }
 
 }

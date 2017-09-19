@@ -14,12 +14,47 @@
         Person A Owes:
       </strong>
     </dt>
-    <dd>{{ personATotal }}</dd>
+    <dd>{{ personATotal }}$</dd>
     <dt>
       <strong>
         Person B Owes:
       </strong>
     </dt>
-    <dd>{{ personBTotal }}</dd>
+    <dd>{{ personBTotal }}$</dd>
+    <dt>
+      <strong>
+        Total:
+      </strong>
+    </dt>
+    <dd>{{ total }}$</dd>
   </dl>
+
+  <hr>
+
+  <ion-grid class="share-buttons">
+      <ion-row>
+        <ion-col col-3>
+            <button ion-button full (click)="shareClick()">
+                <ion-icon name="share"></ion-icon>
+              </button>
+        </ion-col>
+        <ion-col col-3>
+            <button ion-button full icon-left color="secondary" (click)="shareVenmoClick()">
+                <span>Venmo</span>
+              </button>
+        </ion-col>
+        <ion-col col-3>
+            <button ion-button full icon-left color="secondary" (click)="sharePaypalClick()">
+                <span>Paypal</span>
+              </button>
+        </ion-col>
+        <ion-col col-3>
+            <button ion-button full icon-left color="secondary" (click)="shareGoogleClick()">
+                <span>Google</span>
+              </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
 </ion-content>

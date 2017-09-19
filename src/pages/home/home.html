@@ -7,8 +7,36 @@
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Additional A</ion-label>
+      <ion-input type="text" [(ngModel)]="additA"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Additional B</ion-label>
+      <ion-input type="text" [(ngModel)]="additB"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Total with tax</ion-label>
+      <ion-input type="text" [(ngModel)]="totalWithTax"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Change Tax Rate ({{taxRate}}%)</ion-label>
+      <ion-checkbox [(ngModel)]="alterTax"></ion-checkbox>
+    </ion-item>
+
+    <ion-item [hidden]="!alterTax">
+      <ion-label floating>Tax Rate %</ion-label>
+      <ion-input type="text" [(ngModel)]="taxRate"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <button ion-button full (click)="calculate()">Calculate</button>
+
 </ion-content>

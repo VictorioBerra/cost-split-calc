@@ -1,18 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { CostSplitCalculatorProvider } from '../../providers/cost-split-calculator/cost-split-calculator';
+
+import { ExpenseCard, Expense } from '../../models/expensecard.model';
 
 import { SummaryPage } from '../summary/summary';
 
-// TODO, where to put these?
-interface ExpenseCard {
-  name: string;
-  expenses: Expense[];
-}
-
-interface Expense {
-  value: number
-}
 
 @Component({
   selector: 'page-home',
@@ -25,22 +18,42 @@ export class HomePage {
 
   expenseCards: ExpenseCard[];
 
-  //debug
-  additA = 40;
   totalWithTax = 107.5;
-
-  //ignoreTax: boolean = false;
   
-  constructor(public navCtrl: NavController, public calcService: CostSplitCalculatorProvider) {
+  constructor(public navCtrl: NavController, private alertCtrl: AlertController, public calcService: CostSplitCalculatorProvider) {
     this.expenseCards = [
       {
         name: 'Person 1',
         expenses: [
           {
-            value: 40
+            value: 8
           }
         ]
       }
+      // DEBUG
+      ,{
+        name: 'Person 1',
+        expenses: [
+          {
+            value: 8
+          },
+          {
+            value: 43.5
+          },
+          {
+            value: 0.5
+          }
+        ]
+      },
+      {
+        name: 'Person 1',
+        expenses: [
+          {
+            value: 1
+          }
+        ]
+      }
+      // DEBUG
     ];
   }
 
@@ -50,7 +63,7 @@ export class HomePage {
       name: `Person ${nextId}`,
       expenses: [
         {
-          value: 40
+          value: 0
         }
       ]
     });
@@ -74,12 +87,13 @@ export class HomePage {
 
   calculate = function() {
 
+    // normalize
     var totalWithTax: number = + parseFloat(this.totalWithTax).toFixed(2);
     var taxRate: number = + parseFloat(this.taxRate).toFixed(2);
-    var additA: number = parseInt(this.additA, 10) || 0;
-    var additB: number = parseInt(this.additB, 10) || 0;
 
-    this.navCtrl.push(SummaryPage, this.calcService.Calculate(totalWithTax, taxRate, additA, additB));
+    var reciept = this.calcService.Calculate(totalWithTax, taxRate, this.expenseCards)
+
+    //this.navCtrl.push(SummaryPage, reciept);
   }
 
 }

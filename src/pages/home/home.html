@@ -1,34 +1,33 @@
-<ion-header>
+<ion-header class="header-controls">
+
   <ion-navbar color="primary">
     <ion-title>
       Cost Split Calculator
     </ion-title>
     <ion-buttons end>
       <!-- <button ion-button icon-only (click)="openModal()"> -->
-      <button ion-button icon-only>
+      <button ion-button icon-only (click)="calculate()">
           <ion-icon name="checkmark"></ion-icon>
         </button>
     </ion-buttons>
   </ion-navbar>
-</ion-header>
 
-<ion-content padding>
-
-  <ion-list>
-
+  <ion-list padding>
     <ion-item>
       <ion-label fixed>Total w/tax</ion-label>
       <ion-input type="number" [(ngModel)]="totalWithTax"></ion-input>
     </ion-item>
-
     <ion-item>
       <ion-label fixed>Tax rate</ion-label>
       <ion-input type="number" [(ngModel)]="taxRate"></ion-input>
     </ion-item>
-
   </ion-list>
 
-  <ion-list>
+</ion-header>
+
+<ion-content padding class="cards-bg">
+
+  <ion-list class="">
 
     <ion-card *ngFor="let card of expenseCards">
 
@@ -43,7 +42,7 @@
             <button ion-button item-start (click)="removeExpense(expense, card.expenses)">
               <ion-icon name="trash"></ion-icon>
             </button>
-            <ion-input placeholder="Personal Expense" [(ngModel)]="expense.value"></ion-input>
+            <ion-input type="number" placeholder="Personal Expense" [(ngModel)]="expense.value"></ion-input>
           </ion-item>
         </ion-list>
 
@@ -62,10 +61,8 @@
 
   </ion-list>
 
-
   <ion-fab right bottom>
     <button ion-fab (click)="addNewCard()"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
-
 
 </ion-content>

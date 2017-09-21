@@ -1,18 +1,19 @@
-<ion-header class="header-controls">
-
-  <ion-navbar color="primary">
+<ion-header>
+  <ion-navbar>
     <ion-title>
       Cost Split Calculator
     </ion-title>
     <ion-buttons end>
-      <!-- <button ion-button icon-only (click)="openModal()"> -->
       <button ion-button icon-only (click)="calculate()">
           <ion-icon name="checkmark"></ion-icon>
         </button>
     </ion-buttons>
   </ion-navbar>
+</ion-header>
 
-  <ion-list padding>
+<ion-content class="cards-bg">
+
+  <ion-list padding-bottom>
     <ion-item>
       <ion-label fixed>Total w/tax</ion-label>
       <ion-input type="number" [(ngModel)]="totalWithTax"></ion-input>
@@ -23,11 +24,7 @@
     </ion-item>
   </ion-list>
 
-</ion-header>
-
-<ion-content padding class="cards-bg">
-
-  <ion-list class="">
+  <ion-list>
 
     <ion-card *ngFor="let card of expenseCards">
 

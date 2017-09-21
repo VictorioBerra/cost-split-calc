@@ -1,8 +1,12 @@
 page-home {
-  .header-controls {
-    background-color: white;
-  }
-  ion-content.cards-bg {
-    background-color: #f4f4f7;
+  // .list.no-bottom-border {
+  //   ion-item:last-child {
+      
+  //   }
+  // }
+  ion-content {
+    &.cards-bg {
+      background-color: #f4f4f7;
+    }
   }
 }

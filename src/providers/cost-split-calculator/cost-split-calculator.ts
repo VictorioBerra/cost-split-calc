@@ -38,18 +38,26 @@ export class CostSplitCalculatorProvider {
     // Start building the reciept
     let recieptItems: RecieptItem[] = expenseCards.map(card => {
 
-      let newReciept: RecieptItem = new RecieptItem();
-      newReciept.name = card.name;
-      newReciept.totalExpensesWithoutTax = _.sum(card.expenses.map(expense => expense.value * 1));
-      newReciept.expensesWithTax = newReciept.totalExpensesWithoutTax * (1 + decTaxRate);
-      newReciept.totalOwedWithTax = splitDifferenceWithTax + newReciept.expensesWithTax;
-      newReciept.totalPercentageBill = newReciept.totalOwedWithTax / expenseCards.length;
+      let newRecieptItem: RecieptItem = new RecieptItem();
+      newRecieptItem.name = card.name;
+      newRecieptItem.totalExpensesWithoutTax = _.sum(card.expenses.map(expense => expense.value * 1));
+      newRecieptItem.expensesWithTax = newRecieptItem.totalExpensesWithoutTax * (1 + decTaxRate);
+      newRecieptItem.totalOwedWithTax = _.round((splitDifferenceWithTax + newRecieptItem.expensesWithTax), 2);
+      newRecieptItem.totalPercentageBill = newRecieptItem.totalOwedWithTax / expenseCards.length;
+      newRecieptItem.expenses = card.expenses;
 
-      return newReciept;
+      return newRecieptItem;
     });
 
     let reciept = new Reciept(recieptItems);
-    reciept.total = _.sum(_.flatten(recieptItems.map(reciept => reciept.totalOwedWithTax)));
+    reciept.total = _.round(_.sum(_.flatten(recieptItems.map(reciept => reciept.totalOwedWithTax))), 2);
+
+    if(reciept.total > totalWithTax) {
+      reciept.total -= .01;
+      // Pick lottery winner
+      var recieptItem = recieptItems[Math.floor(Math.random()*recieptItems.length)];
+      recieptItem.totalOwedWithTax += .01;
+    }
 
     return reciept;
 

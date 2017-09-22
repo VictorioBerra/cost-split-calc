@@ -41,16 +41,21 @@ export class HomePage {
       expenses: [{
         value: 8
       }]
-    }];
+    },
+  
+    {
+      name: 'Person 2',
+      expenses: []
+    }
+  
+  ];
   };
 
   addNewCard = function () {
     let nextId = this.expenseCards.length + 1;
     this.expenseCards.push({
       name: `Person ${nextId}`,
-      expenses: [{
-        value: 0
-      }]
+      expenses: []
     });
   }
 
@@ -65,12 +70,6 @@ export class HomePage {
   }
 
   removeExpense = function (card, expenses) {
-
-    // TODO BROKEN
-    if(expenses.length == 1) {
-      this.removeCard(card);
-    }
-
     expenses.splice(expenses.indexOf(card), 1);
   }
 

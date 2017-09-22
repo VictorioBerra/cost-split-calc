@@ -31,11 +31,11 @@ export class SummaryPage {
   //   return `Person A owes: ${this.personATotal}$ and person B owes: ${this.personBTotal}$ for a total of: ${this.total}$`;
   // }
 
-  // shareClick = function () {
-  //   var shareSubject: string = 'Cost Split Calculator';
+  shareClick = function () {
+    var shareSubject: string = 'Cost Split Calculator';
 
-  //   this.socialShareing.share(this.getSubject(), shareSubject);
-  // }
+    this.socialShareing.share(this.getSubject(), shareSubject);
+  }
 
   // shareVenmoClick = function () {
   //   this.socialShareing.shareVia('venmo', this.personATotal, this.getSubject());

@@ -42,14 +42,16 @@
 
       <ion-card-content>
 
-        <ion-list>
-          <ion-item *ngFor="let expense of card.expenses">
+        <ion-list padding *ngFor="let expense of card.expenses">
+          <ion-item>
             <button clear item-right icon-left ion-button (click)="removeExpense(expense, card.expenses)">
               <ion-icon name="trash"></ion-icon>
             </button>
-            <ion-input type="number" placeholder="Personal Expense" [(ngModel)]="expense.value"></ion-input>
+            <ion-input type="number" placeholder="Amount" [(ngModel)]="expense.value"></ion-input>
           </ion-item>
-
+          <ion-item>
+            <ion-input placeholder="Wassit fer?" [(ngModel)]="expense.note"></ion-input>
+          </ion-item>          
         </ion-list>
 
       </ion-card-content>

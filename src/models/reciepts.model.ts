@@ -8,7 +8,7 @@ export class Reciept {
     
   total: number;
 
-  constructor(private recieptItems: RecieptItem[]) {}
+  constructor(public recieptItems: RecieptItem[]) {}
 
 }
 
@@ -19,6 +19,7 @@ export class RecieptItem {
   expensesWithTax: number;
   totalPercentageBill: number;
   totalOwedWithTax: number;
+  expenses: Expense[];
 
   constructor() {}
 

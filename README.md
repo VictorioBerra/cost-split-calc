@@ -5,8 +5,7 @@
 - Share feature
     - Share with custom message (emoji?)
     - Shgare per user.
-- Taxes and better summary
-- Saving
+- Saving and viewing history
 
 
 ```bash

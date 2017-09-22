@@ -4,5 +4,6 @@ export class ExpenseCard {
 }
 
 export class Expense {
-  value: number
+  value: number;
+  note?: string;
 }

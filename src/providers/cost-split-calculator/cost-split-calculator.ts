@@ -37,8 +37,10 @@ export class CostSplitCalculatorProvider {
 
     // Start building the reciept
     let recieptItems: RecieptItem[] = expenseCards.map(card => {
-      let newReciept: RecieptItem = new RecieptItem(card);
 
+      let newReciept: RecieptItem = new RecieptItem();
+      newReciept.name = card.name;
+      newReciept.totalExpensesWithoutTax = _.sum(card.expenses.map(expense => expense.value * 1));
       newReciept.expensesWithTax = newReciept.totalExpensesWithoutTax * (1 + decTaxRate);
       newReciept.totalOwedWithTax = splitDifferenceWithTax + newReciept.expensesWithTax;
       newReciept.totalPercentageBill = newReciept.totalOwedWithTax / expenseCards.length;
@@ -46,7 +48,8 @@ export class CostSplitCalculatorProvider {
       return newReciept;
     });
 
-    var reciept = new Reciept(recieptItems);
+    let reciept = new Reciept(recieptItems);
+    reciept.total = _.sum(_.flatten(recieptItems.map(reciept => reciept.totalOwedWithTax)));
 
     return reciept;
 

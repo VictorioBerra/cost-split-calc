@@ -5,8 +5,8 @@
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="calculate()">
-          <ion-icon name="checkmark"></ion-icon>
-        </button>
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -29,18 +29,27 @@
     <ion-card *ngFor="let card of expenseCards">
 
       <ion-card-header>
-        {{ card.name }}
+
+        <ion-item>
+          <ion-input type="text" [(ngModel)]="card.name"></ion-input>
+          <button color="danger" clear item-right icon-left ion-button (click)="removeCard(card)">
+            <ion-icon name="trash"></ion-icon>
+          </button>
+        </ion-item>
+
+
       </ion-card-header>
 
       <ion-card-content>
 
         <ion-list>
           <ion-item *ngFor="let expense of card.expenses">
-            <button ion-button item-start (click)="removeExpense(expense, card.expenses)">
+            <button clear item-right icon-left ion-button (click)="removeExpense(expense, card.expenses)">
               <ion-icon name="trash"></ion-icon>
             </button>
             <ion-input type="number" placeholder="Personal Expense" [(ngModel)]="expense.value"></ion-input>
           </ion-item>
+
         </ion-list>
 
       </ion-card-content>
@@ -48,9 +57,9 @@
       <ion-row>
         <ion-col>
           <button ion-button full icon-left clear small (click)="addExpense(card)">
-              <ion-icon name="add"></ion-icon>
-              <div>Add Personal Expense</div>
-            </button>
+            <ion-icon name="add"></ion-icon>
+            <div>Add Expense</div>
+          </button>
         </ion-col>
       </ion-row>
 
@@ -59,7 +68,9 @@
   </ion-list>
 
   <ion-fab right bottom>
-    <button ion-fab (click)="addNewCard()"><ion-icon name="add"></ion-icon></button>
+    <button ion-fab (click)="addNewCard()">
+      <ion-icon name="add"></ion-icon>
+    </button>
   </ion-fab>
 
 </ion-content>

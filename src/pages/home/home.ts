@@ -37,34 +37,12 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, private alertCtrl: AlertController, public calcService: CostSplitCalculatorProvider) {
     this.expenseCards = [{
-        name: 'Person 1',
-        expenses: [{
-          value: 8
-        }]
-      }
-      // DEBUG
-      , {
-        name: 'Person 2',
-        expenses: [{
-            value: 8
-          },
-          {
-            value: 43.5
-          },
-          {
-            value: 0.2
-          }
-        ]
-      },
-      {
-        name: 'Person 3',
-        expenses: [{
-          value: 1
-        }]
-      }
-      // DEBUG
-    ];
-  }
+      name: 'Person 1',
+      expenses: [{
+        value: 8
+      }]
+    }];
+  };
 
   addNewCard = function () {
     let nextId = this.expenseCards.length + 1;
@@ -82,12 +60,16 @@ export class HomePage {
     });
   }
 
+  removeCard = function(card) {
+    this.expenseCards.splice(this.expenseCards.indexOf(card), 1);
+  }
+
   removeExpense = function (card, expenses) {
 
-    // TODO, ask to remove card?
-    // if(expenses.length == 1) {
-    //   this.expenseCards.splice(this.expenseCards.indexOf(card), 1);
-    // }
+    // TODO BROKEN
+    if(expenses.length == 1) {
+      this.removeCard(card);
+    }
 
     expenses.splice(expenses.indexOf(card), 1);
   }
@@ -100,7 +82,9 @@ export class HomePage {
 
     let reciept: Reciept = this.calcService.Calculate(totalWithTax, taxRate, this.expenseCards);
 
-    this.navCtrl.push(SummaryPage, {reciept});
+    this.navCtrl.push(SummaryPage, {
+      reciept
+    });
   }
 
 }

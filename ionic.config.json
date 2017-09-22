@@ -1,8 +1,8 @@
 {
-  "name": "GrocerySplitCalc",
-  "app_id": "",
+  "name": "CostSplitCalc",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "app_id": "be6a2dea"
 }

@@ -1,14 +1,12 @@
 import {
-  ExpenseCard,
   Expense
 } from './expensecard.model';
-import _ from 'lodash';
 
 export class Reciept {
     
   total: number;
 
-  constructor(public recieptItems: RecieptItem[]) {}
+  constructor(public recieptItems: RecieptItem[]) { }
 
 }
 

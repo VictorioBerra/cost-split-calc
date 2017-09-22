@@ -3,8 +3,7 @@ import {
 } from '@angular/core';
 import 'rxjs/add/operator/map';
 import {
-  ExpenseCard,
-  Expense
+  ExpenseCard
 } from '../../models/expensecard.model';
 import {
   Reciept,

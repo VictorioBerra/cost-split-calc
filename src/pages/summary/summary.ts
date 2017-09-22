@@ -24,17 +24,11 @@ export class SummaryPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public socialShareing: SocialSharing) {
     this.reciept = this.navParams.get('reciept');
-    console.log(this.reciept);
   }
-
-  // private getSubject = function (): string {
-  //   return `Person A owes: ${this.personATotal}$ and person B owes: ${this.personBTotal}$ for a total of: ${this.total}$`;
-  // }
 
   shareClick = function () {
     var shareSubject: string = 'Cost Split Calculator';
-
-    this.socialShareing.share(this.getSubject(), shareSubject);
+    this.socialShareing.share(getSubject(), shareSubject);
   }
 
   // shareVenmoClick = function () {
@@ -53,4 +47,14 @@ export class SummaryPage {
   //   this.socialShareing.shareVia('amazon', this.personATotal, this.getSubject());
   // }
 
+}
+
+function getSubject(): string {
+  let result: string = `The total cost was $${this.reciept.total}. `;
+  let resultItems: string[] = [];
+  this.reciept.recieptItems.forEach(recieptItem => {
+    resultItems.push(`${recieptItem.name} owes $${recieptItem.totalOwedWithTax}`);
+  });
+  result += resultItems.join(', ') + '.';
+  return result;
 }

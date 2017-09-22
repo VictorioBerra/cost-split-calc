@@ -2,16 +2,14 @@ import {
   Component
 } from '@angular/core';
 import {
-  NavController,
-  AlertController
+  NavController
 } from 'ionic-angular';
 import {
   CostSplitCalculatorProvider
 } from '../../providers/cost-split-calculator/cost-split-calculator';
 
 import {
-  ExpenseCard,
-  Expense
+  ExpenseCard
 } from '../../models/expensecard.model';
 
 import {
@@ -35,7 +33,7 @@ export class HomePage {
 
   totalWithTax = 107.5;
 
-  constructor(public navCtrl: NavController, private alertCtrl: AlertController, public calcService: CostSplitCalculatorProvider) {
+  constructor(public navCtrl: NavController, public calcService: CostSplitCalculatorProvider) {
     this.expenseCards = [{
       name: 'Person 1',
       expenses: [{

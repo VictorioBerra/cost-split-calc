@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>
-      <ion-icon name="list"></ion-icon> Summary
+      Reciept
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -10,7 +10,7 @@
 <ion-content padding>
 
   <ion-list>
-    <ion-item *ngFor="let recieptItem of reciept.recieptItems">
+    <ion-item padding-top *ngFor="let recieptItem of reciept.recieptItems">
       <h2>{{ recieptItem.name }}</h2>
       <p>
         <strong>Total Owed:</strong>
@@ -28,8 +28,7 @@
       </p>
     </ion-item>
   </ion-list>
-  <h3>Total: </h3>
-  <span> ${{ reciept.total | number : '2.2-2' }}</span>
+  <h3>Total: ${{ reciept.total | number : '2.2-2' }}</h3>
 
   <hr>
 

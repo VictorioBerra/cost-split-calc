@@ -8,26 +8,28 @@
 
 
 <ion-content padding>
-  <dl>
-    <dt>
-      <strong>
-        Person A Owes:
-      </strong>
-    </dt>
-    <dd>{{ personATotal }}$</dd>
-    <dt>
-      <strong>
-        Person B Owes:
-      </strong>
-    </dt>
-    <dd>{{ personBTotal }}$</dd>
-    <dt>
-      <strong>
-        Total:
-      </strong>
-    </dt>
-    <dd>{{ total }}$</dd>
-  </dl>
+
+  <ion-list>
+    <ion-item *ngFor="let recieptItem of reciept.recieptItems">
+      <h2>{{ recieptItem.name }}</h2>
+      <p>
+        <strong>Total Owed:</strong>
+        <span> ${{ recieptItem.totalOwedWithTax }} </span>
+      </p>
+      <div class="expense" *ngIf="recieptItem.expenses.length > 0">
+        <p *ngFor="let expense of recieptItem.expenses">
+          <strong>{{ expense.note || 'extra expense' }}:</strong>
+          <span> ${{ expense.value }}</span>
+        </p>
+      </div>
+      <p>
+        <strong>Total Percentage:</strong>
+        <span> {{ recieptItem.totalPercentageBill | number : '2.2-2' }}%</span>
+      </p>
+    </ion-item>
+  </ion-list>
+  <h3>Total: </h3>
+  <span> ${{ reciept.total | number : '2.2-2' }}</span>
 
   <hr>
 
@@ -35,31 +37,31 @@
     <ion-row>
       <ion-col col-12>
         <button ion-button full (click)="shareClick()">
-                <ion-icon name="share"></ion-icon>
-              </button>
+          <ion-icon name="share"></ion-icon>
+        </button>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col col-3>
+      <!-- <ion-col col-3>
         <button ion-button full icon-left color="secondary" (click)="shareAmazonClick()">
-                  <span>Amazon</span>
-                </button>
+          <span>Amazon</span>
+        </button>
       </ion-col>
       <ion-col col-3>
         <button ion-button full icon-left color="secondary" (click)="shareVenmoClick()">
-                <span>Venmo</span>
-              </button>
+          <span>Venmo</span>
+        </button>
       </ion-col>
       <ion-col col-3>
         <button ion-button full icon-left color="secondary" (click)="sharePaypalClick()">
-                <span>Paypal</span>
-              </button>
+          <span>Paypal</span>
+        </button>
       </ion-col>
       <ion-col col-3>
         <button ion-button full icon-left color="secondary" (click)="shareGoogleClick()">
-                <span>Google</span>
-              </button>
-      </ion-col>
+          <span>Google</span>
+        </button>
+      </ion-col> -->
     </ion-row>
   </ion-grid>
 

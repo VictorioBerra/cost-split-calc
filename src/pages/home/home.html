@@ -1,42 +1,78 @@
 <ion-header>
-  <ion-navbar color="primary">
+  <ion-navbar>
     <ion-title>
-      <ion-icon name="calculator"></ion-icon> Cost Split Calculator
+      Cost Split Calculator
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="calculate()">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="cards-bg">
+
+  <ion-list padding-bottom>
+    <ion-item>
+      <ion-label fixed>Total w/tax</ion-label>
+      <ion-input type="number" [(ngModel)]="totalWithTax"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Tax rate</ion-label>
+      <ion-input type="number" [(ngModel)]="taxRate"></ion-input>
+    </ion-item>
+  </ion-list>
 
   <ion-list>
 
-    <ion-item>
-      <ion-label floating>Additional A</ion-label>
-      <ion-input type="text" [(ngModel)]="additA"></ion-input>
-    </ion-item>
+    <ion-card *ngFor="let card of expenseCards">
 
-    <ion-item>
-      <ion-label floating>Additional B</ion-label>
-      <ion-input type="text" [(ngModel)]="additB"></ion-input>
-    </ion-item>
+      <ion-card-header>
 
-    <ion-item>
-      <ion-label floating>Total with tax</ion-label>
-      <ion-input type="text" [(ngModel)]="totalWithTax"></ion-input>
-    </ion-item>
+        <ion-item>
+          <ion-input type="text" [(ngModel)]="card.name"></ion-input>
+          <button color="danger" clear item-right icon-left ion-button (click)="removeCard(card)">
+            <ion-icon name="trash"></ion-icon>
+          </button>
+        </ion-item>
 
-    <ion-item>
-      <ion-label>Change Tax Rate ({{taxRate}}%)</ion-label>
-      <ion-checkbox [(ngModel)]="alterTax"></ion-checkbox>
-    </ion-item>
 
-    <ion-item [hidden]="!alterTax">
-      <ion-label floating>Tax Rate %</ion-label>
-      <ion-input type="text" [(ngModel)]="taxRate"></ion-input>
-    </ion-item>
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <ion-list padding *ngFor="let expense of card.expenses">
+          <ion-item>
+            <button clear item-right icon-left ion-button (click)="removeExpense(expense, card.expenses)">
+              <ion-icon name="trash"></ion-icon>
+            </button>
+            <ion-input type="number" placeholder="Amount" [(ngModel)]="expense.value"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input placeholder="Wassit fer?" [(ngModel)]="expense.note"></ion-input>
+          </ion-item>          
+        </ion-list>
+
+      </ion-card-content>
+
+      <ion-row>
+        <ion-col>
+          <button ion-button full icon-left clear small (click)="addExpense(card)">
+            <ion-icon name="add"></ion-icon>
+            <div>Add Expense</div>
+          </button>
+        </ion-col>
+      </ion-row>
+
+    </ion-card>
 
   </ion-list>
 
-  <button ion-button full (click)="calculate()">Calculate</button>
+  <ion-fab right bottom>
+    <button ion-fab (click)="addNewCard()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 
 </ion-content>

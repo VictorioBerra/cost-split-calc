@@ -1,3 +1,12 @@
 page-home {
-
+  // .list.no-bottom-border {
+  //   ion-item:last-child {
+      
+  //   }
+  // }
+  ion-content {
+    &.cards-bg {
+      background-color: #f4f4f7;
+    }
+  }
 }

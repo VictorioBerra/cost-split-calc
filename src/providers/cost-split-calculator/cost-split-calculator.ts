@@ -1,44 +1,71 @@
-import { Injectable } from '@angular/core';
+import {
+  Injectable
+} from '@angular/core';
 import 'rxjs/add/operator/map';
+import {
+  ExpenseCard,
+  Expense
+} from '../../models/expensecard.model';
+import {
+  Reciept,
+  RecieptItem
+} from '../../models/reciepts.model';
+import _ from 'lodash';
 
-/*
-  Generated class for the CostSplitCalculatorProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class CostSplitCalculatorProvider {
 
-  constructor() { }
+  constructor() {}
 
-  Calculate = function(totalWithTax: number, taxRate: number, additA: number, additB: number,){
+  public Calculate(totalWithTax: number, taxRate: number, expenseCards: ExpenseCard[]): Reciept {
 
     // extract tax
-    var totalWithoutTax: number = totalWithTax / (1 + (taxRate / 100));
-    var totalTaxCollected: number = totalWithTax - totalWithoutTax;
+    let decTaxRate: number = (taxRate / 100);
+    let totalWithoutTax: number = totalWithTax / (1 + decTaxRate);
+    let totalIndividualExpenses: number = this.getTotalAllExpenses(expenseCards);
+    let totalLessAllExpenses: number = totalWithoutTax - totalIndividualExpenses;
 
-    // Calc totals
-    var totalLessAdditional: number = totalWithoutTax - additA - additB;
+    // Somone entered too many expenses
+    if (totalLessAllExpenses < 0) {
+      // TODO: how to handle errors?
+      throw Error("All individual expenses exceeded the total.");
+    }
 
-    var splitDifference: number = totalLessAdditional / 2;
+    //let totalTaxCollected: number = totalWithTax - totalWithoutTax;
+    let splitDifferenceWithoutTax: number = totalLessAllExpenses / expenseCards.length;
+    let splitDifferenceWithTax: number = splitDifferenceWithoutTax * (1 + decTaxRate);
 
-    var totalPersonAWithoutTax: number = additA + splitDifference;
-    var totalPersonBWithoutTax: number = additB + splitDifference;
-    
-    // Add tax
-    var personATotalPercentage = (totalPersonAWithoutTax / totalWithoutTax);
-    var totalPersonA = (personATotalPercentage * totalTaxCollected) + totalPersonAWithoutTax;
-    
-    var personBTotalPercentage = (totalPersonBWithoutTax / totalWithoutTax );
-    var totalPersonB = (personBTotalPercentage * totalTaxCollected) + totalPersonBWithoutTax;
+    // Start building the reciept
+    let recieptItems: RecieptItem[] = expenseCards.map(card => {
 
-    return {
-      personATotal: totalPersonA,
-      personBTotal: totalPersonB,
-      total: (totalPersonA + totalPersonB).toFixed(2)
-    };
+      let newRecieptItem: RecieptItem = new RecieptItem();
+      newRecieptItem.name = card.name;
+      newRecieptItem.totalExpensesWithoutTax = _.sum(card.expenses.map(expense => expense.value * 1));
+      newRecieptItem.expensesWithTax = newRecieptItem.totalExpensesWithoutTax * (1 + decTaxRate);
+      newRecieptItem.totalOwedWithTax = _.round((splitDifferenceWithTax + newRecieptItem.expensesWithTax), 2);
+      newRecieptItem.totalPercentageBill = newRecieptItem.totalOwedWithTax / expenseCards.length;
+      newRecieptItem.expenses = card.expenses;
+
+      return newRecieptItem;
+    });
+
+    let reciept = new Reciept(recieptItems);
+    reciept.total = _.round(_.sum(_.flatten(recieptItems.map(reciept => reciept.totalOwedWithTax))), 2);
+
+    if(reciept.total > totalWithTax) {
+      reciept.total -= .01;
+      // Pick lottery winner
+      var recieptItem = recieptItems[Math.floor(Math.random()*recieptItems.length)];
+      recieptItem.totalOwedWithTax += .01;
+    }
+
+    return reciept;
 
   }
+
+  private getTotalAllExpenses(expenseCards: ExpenseCard[]): number {
+    return _.sum(_.flatten(expenseCards.map(card => card.expenses.map(expense => expense.value))));
+  }
+
 
 }

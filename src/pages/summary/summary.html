@@ -8,58 +8,46 @@
 
 
 <ion-content padding>
-  <dl>
-    <dt>
-      <strong>
-        Person A Owes:
-      </strong>
-    </dt>
-    <dd>{{ personATotal }}$</dd>
-    <dt>
-      <strong>
-        Person B Owes:
-      </strong>
-    </dt>
-    <dd>{{ personBTotal }}$</dd>
-    <dt>
-      <strong>
-        Total:
-      </strong>
-    </dt>
-    <dd>{{ total }}$</dd>
-  </dl>
+
+  <ion-list>
+    <ion-item  *ngFor="let recieptItem of reciept.recieptItems">
+      <h2>{{ recieptItem.name }}</h2>
+      <strong>Total Owed:</strong><span> {{ recieptItem.totalOwedWithTax }} </span>
+    </ion-item>
+  </ion-list>
+  <h3>Total: </h3><span>{{ reciept.total }}</span>
 
   <hr>
 
   <ion-grid class="share-buttons">
     <ion-row>
       <ion-col col-12>
-        <button ion-button full (click)="shareClick()">
-                <ion-icon name="share"></ion-icon>
-              </button>
+        <!-- <button ion-button full (click)="shareClick()">
+          <ion-icon name="share"></ion-icon>
+        </button> -->
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col col-3>
+      <!-- <ion-col col-3>
         <button ion-button full icon-left color="secondary" (click)="shareAmazonClick()">
-                  <span>Amazon</span>
-                </button>
+          <span>Amazon</span>
+        </button>
       </ion-col>
       <ion-col col-3>
         <button ion-button full icon-left color="secondary" (click)="shareVenmoClick()">
-                <span>Venmo</span>
-              </button>
+          <span>Venmo</span>
+        </button>
       </ion-col>
       <ion-col col-3>
         <button ion-button full icon-left color="secondary" (click)="sharePaypalClick()">
-                <span>Paypal</span>
-              </button>
+          <span>Paypal</span>
+        </button>
       </ion-col>
       <ion-col col-3>
         <button ion-button full icon-left color="secondary" (click)="shareGoogleClick()">
-                <span>Google</span>
-              </button>
-      </ion-col>
+          <span>Google</span>
+        </button>
+      </ion-col> -->
     </ion-row>
   </ion-grid>
 

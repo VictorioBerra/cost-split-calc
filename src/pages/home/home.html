@@ -29,19 +29,15 @@
     <ion-card *ngFor="let card of expenseCards">
 
       <ion-card-header>
-
         <ion-item>
           <ion-input type="text" [(ngModel)]="card.name"></ion-input>
           <button color="danger" clear item-right icon-left ion-button (click)="removeCard(card)">
             <ion-icon name="trash"></ion-icon>
           </button>
         </ion-item>
-
-
       </ion-card-header>
 
       <ion-card-content>
-
         <ion-list padding *ngFor="let expense of card.expenses">
           <ion-item>
             <button clear item-right icon-left ion-button (click)="removeExpense(expense, card.expenses)">
@@ -53,7 +49,6 @@
             <ion-input placeholder="Wassit fer?" [(ngModel)]="expense.note"></ion-input>
           </ion-item>          
         </ion-list>
-
       </ion-card-content>
 
       <ion-row>

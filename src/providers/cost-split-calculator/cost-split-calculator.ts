@@ -18,6 +18,13 @@ export class CostSplitCalculatorProvider {
 
   public Calculate(totalWithTax: number, taxRate: number, expenseCards: ExpenseCard[]): Reciept {
 
+    // Angular returns ngModel bound items as strings.
+    expenseCards.forEach(card => card.expenses = card.expenses.filter(expense => {
+      if(!_.isNull(expense.value)) {
+        return Number(expense.value);
+      }
+    }));
+
     // extract tax
     let decTaxRate: number = (taxRate / 100);
     let totalWithoutTax: number = totalWithTax / (1 + decTaxRate);
@@ -52,10 +59,9 @@ export class CostSplitCalculatorProvider {
     reciept.total = _.round(_.sum(_.flatten(recieptItems.map(reciept => reciept.totalOwedWithTax))), 2);
 
     if(reciept.total > totalWithTax) {
-      reciept.total -= .01;
-      // Pick lottery winner
+      // Pick lottery winner to get the extra
       var recieptItem = recieptItems[Math.floor(Math.random()*recieptItems.length)];
-      recieptItem.totalOwedWithTax += .01;
+      recieptItem.totalOwedWithTax += (totalWithTax -reciept.total);
     }
 
     return reciept;

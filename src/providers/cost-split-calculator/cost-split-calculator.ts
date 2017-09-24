@@ -21,8 +21,11 @@ export class CostSplitCalculatorProvider {
     // Angular returns ngModel bound items as strings.
     expenseCards.forEach(card => card.expenses = card.expenses.filter(expense => {
       if(!_.isNull(expense.value)) {
-        return Number(expense.value);
+        return expense.value;
       }
+    }));
+    expenseCards.forEach(card => card.expenses.forEach(expense => {
+      expense.value = Number(expense.value);
     }));
 
     // extract tax
@@ -34,7 +37,7 @@ export class CostSplitCalculatorProvider {
     // Somone entered too many expenses
     if (totalLessAllExpenses < 0) {
       // TODO: how to handle errors?
-      throw Error("All individual expenses exceeded the total.");
+      throw Error(`All individual expenses of $${totalIndividualExpenses} exceeded the before tax total: $${totalWithoutTax}.`);
     }
 
     //let totalTaxCollected: number = totalWithTax - totalWithoutTax;
@@ -49,7 +52,7 @@ export class CostSplitCalculatorProvider {
       newRecieptItem.totalExpensesWithoutTax = _.sum(card.expenses.map(expense => expense.value * 1));
       newRecieptItem.expensesWithTax = newRecieptItem.totalExpensesWithoutTax * (1 + decTaxRate);
       newRecieptItem.totalOwedWithTax = _.round((splitDifferenceWithTax + newRecieptItem.expensesWithTax), 2);
-      newRecieptItem.totalPercentageBill = newRecieptItem.totalOwedWithTax / expenseCards.length;
+      newRecieptItem.totalPercentageBill = (newRecieptItem.totalOwedWithTax / totalWithTax) * 100;
       newRecieptItem.expenses = card.expenses;
 
       return newRecieptItem;

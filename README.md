@@ -1,7 +1,6 @@
 ## Cost Split Calculator
 
 ### Todo:
-- Client validation
 - Share feature
     - Share with custom message (emoji?)
     - Shgare per user.

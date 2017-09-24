@@ -2,7 +2,8 @@ import {
   Component
 } from '@angular/core';
 import {
-  NavController
+  NavController,
+  AlertController 
 } from 'ionic-angular';
 import {
   CostSplitCalculatorProvider
@@ -33,7 +34,7 @@ export class HomePage {
 
   totalWithTax = 107.5;
 
-  constructor(public navCtrl: NavController, public calcService: CostSplitCalculatorProvider) {
+  constructor(public navCtrl: NavController, public calcService: CostSplitCalculatorProvider, public alertCtrl: AlertController) {
     this.expenseCards = [{
       name: 'Person 1',
       expenses: [{
@@ -74,14 +75,28 @@ export class HomePage {
   calculate = function () {
 
     // normalize
-    var totalWithTax: number = +parseFloat(this.totalWithTax).toFixed(2);
-    var taxRate: number = +parseFloat(this.taxRate).toFixed(2);
+    var totalWithTax: number = Number(this.totalWithTax);
+    var taxRate: number = Number(this.taxRate);
 
-    let reciept: Reciept = this.calcService.Calculate(totalWithTax, taxRate, this.expenseCards);
+    let reciept: Reciept;
 
-    this.navCtrl.push(SummaryPage, {
-      reciept
-    });
+    try {
+
+      reciept = this.calcService.Calculate(totalWithTax, taxRate, this.expenseCards);
+
+      this.navCtrl.push(SummaryPage, {
+        reciept
+      });
+
+    }
+    catch (exception) {
+      this.alertCtrl.create({
+        title: 'Ooops!',
+        subTitle: exception,
+        buttons: ['OK']
+      }).present();
+    }
+
   }
 
 }

@@ -26,8 +26,10 @@
         "@ionic-native/status-bar": "3.12.1",
         "@ionic/storage": "2.0.1",
         "cordova-android": "^6.2.3",
+        "cordova-plugin-add-swift-support": "^1.6.1",
         "cordova-plugin-console": "^1.0.5",
         "cordova-plugin-device": "^1.1.4",
+        "cordova-plugin-ionic": "^1.1.9",
         "cordova-plugin-splashscreen": "^4.0.3",
         "cordova-plugin-statusbar": "^2.2.2",
         "cordova-plugin-whitelist": "^1.3.1",
@@ -53,7 +55,14 @@
             "cordova-plugin-splashscreen": {},
             "cordova-plugin-statusbar": {},
             "cordova-plugin-whitelist": {},
-            "ionic-plugin-keyboard": {}
+            "ionic-plugin-keyboard": {},
+            "cordova-plugin-ionic": {
+                "APP_ID": "be6a2dea",
+                "CHANNEL_NAME": "Master",
+                "UPDATE_METHOD": "background",
+                "UPDATE_API": "https://api.ionicjs.com",
+                "MAX_STORE": "2"
+            }
         },
         "platforms": [
             "android"

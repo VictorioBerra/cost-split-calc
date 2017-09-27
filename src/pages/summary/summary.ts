@@ -28,7 +28,7 @@ export class SummaryPage {
 
   shareClick = function () {
     var shareSubject: string = 'Cost Split Calculator';
-    this.socialShareing.share(getSubject(), shareSubject);
+    this.socialShareing.share(getSubject(this.reciept), shareSubject);
   }
 
   // shareVenmoClick = function () {
@@ -49,10 +49,10 @@ export class SummaryPage {
 
 }
 
-function getSubject(): string {
-  let result: string = `The total cost was $${this.reciept.total}. `;
+function getSubject(reciept: Reciept): string {
+  let result: string = `The total cost was $${reciept.total}. `;
   let resultItems: string[] = [];
-  this.reciept.recieptItems.forEach(recieptItem => {
+  reciept.recieptItems.forEach(recieptItem => {
     resultItems.push(`${recieptItem.name} owes $${recieptItem.totalOwedWithTax}`);
   });
   result += resultItems.join(', ') + '.';

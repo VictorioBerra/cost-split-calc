@@ -64,7 +64,7 @@ export class CostSplitCalculatorProvider {
     if(reciept.total > totalWithTax) {
       // Pick lottery winner to get the extra
       var recieptItem = recieptItems[Math.floor(Math.random()*recieptItems.length)];
-      recieptItem.totalOwedWithTax += (totalWithTax -reciept.total);
+      recieptItem.totalOwedWithTax += (totalWithTax - reciept.total);
     }
 
     return reciept;

@@ -67,8 +67,8 @@ export class CostSplitCalculatorProvider {
     if(reciept.total > totalWithTax) {
       let overFlow = _.round((totalWithTax - reciept.total), 2);
       let recieptItem = recieptItems[0];
-      recieptItem.totalOwedWithTax += overFlow;
-      reciept.total += overFlow;
+      recieptItem.totalOwedWithTax = _.round(recieptItem.totalOwedWithTax + overFlow, 2);
+      reciept.total = _.round(reciept.total + overFlow, 2);
     }
 
     return reciept;

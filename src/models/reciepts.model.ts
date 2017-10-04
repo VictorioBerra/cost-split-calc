@@ -18,6 +18,7 @@ export class RecieptItem {
   totalPercentageBill: number;
   totalOwedWithTax: number;
   expenses: Expense[];
+  extraRounded: boolean;
 
   constructor() {}
 

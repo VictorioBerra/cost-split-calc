@@ -64,11 +64,12 @@ export class CostSplitCalculatorProvider {
     let reciept = new Reciept(recieptItems);
     reciept.total = _.round(_.sum(_.flatten(recieptItems.map(reciept => reciept.totalOwedWithTax))), 2);
 
-    if(reciept.total > totalWithTax) {
+    if(reciept.total !== totalWithTax) {
       let overFlow = _.round((totalWithTax - reciept.total), 2);
       let recieptItem = recieptItems[0];
       recieptItem.totalOwedWithTax = _.round(recieptItem.totalOwedWithTax + overFlow, 2);
       reciept.total = _.round(reciept.total + overFlow, 2);
+      recieptItem.extraRounded = true;
     }
 
     return reciept;

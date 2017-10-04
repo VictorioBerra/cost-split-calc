@@ -19,17 +19,20 @@
       <h3>{{ recieptItem.name }}</h3>
       <p>
         <strong>Total Owed:</strong>
-        <span> ${{ recieptItem.totalOwedWithTax }} </span>
+        <span> ${{ recieptItem.totalOwedWithTax | number : '2.2-2' }} </span>
       </p>
       <div class="expense" *ngIf="recieptItem.expenses.length > 0">
         <p *ngFor="let expense of recieptItem.expenses">
           <strong>{{ expense.note || 'extra expense' }}:</strong>
-          <span> ${{ expense.value }}</span>
+          <span> ${{ expense.value | number : '2.2-2' }}</span>
         </p>
       </div>
       <p>
         <strong>Total Percentage:</strong>
         <span> {{ recieptItem.totalPercentageBill | number : '2.2-2' }}%</span>
+      </p>
+      <p *ngIf="recieptItem.extraRounded">
+        * amount adjusted due to rounding
       </p>
     </ion-item>
   </ion-list>

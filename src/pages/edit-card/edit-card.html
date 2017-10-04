@@ -1,0 +1,37 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Edit</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="save()">
+            <ion-icon name="checkmark"></ion-icon>
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list padding *ngFor="let expense of card.expenses">
+    <ion-item>
+      <button clear item-right icon-left ion-button (click)="removeExpense(expense, card.expenses)">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+      <ion-input type="number" placeholder="Amount" [(ngModel)]="expense.value"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input placeholder="Wassit fer?" [(ngModel)]="expense.note"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-row>
+    <ion-col>
+      <button ion-button full icon-left clear small (click)="addExpense(card)">
+        <ion-icon name="add"></ion-icon>
+        <div>Add Expense</div>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-content>

@@ -3,6 +3,11 @@
     <ion-title>
       Reciept
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="shareClick()">
+        Share
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -11,7 +16,7 @@
 
   <ion-list>
     <ion-item padding-top *ngFor="let recieptItem of reciept.recieptItems">
-      <h2>{{ recieptItem.name }}</h2>
+      <h3>{{ recieptItem.name }}</h3>
       <p>
         <strong>Total Owed:</strong>
         <span> ${{ recieptItem.totalOwedWithTax }} </span>
@@ -28,11 +33,11 @@
       </p>
     </ion-item>
   </ion-list>
-  <h3>Total: ${{ reciept.total | number : '2.2-2' }}</h3>
+  <h3>Total: ${{ reciept.total }}</h3>
 
   <hr>
 
-  <ion-grid class="share-buttons">
+  <!-- <ion-grid class="share-buttons">
     <ion-row>
       <ion-col col-12>
         <button ion-button full (click)="shareClick()">
@@ -40,8 +45,8 @@
         </button>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <!-- <ion-col col-3>
+    <ion-row> -->
+  <!-- <ion-col col-3>
         <button ion-button full icon-left color="secondary" (click)="shareAmazonClick()">
           <span>Amazon</span>
         </button>
@@ -60,9 +65,9 @@
         <button ion-button full icon-left color="secondary" (click)="shareGoogleClick()">
           <span>Google</span>
         </button>
-      </ion-col> -->
-    </ion-row>
-  </ion-grid>
+      </ion-row>
+    </ion-grid>
+  </ion-col> -->
 
 
 </ion-content>

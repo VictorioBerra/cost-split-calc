@@ -3,7 +3,7 @@ import {
 } from '@angular/core';
 import {
   NavController,
-  AlertController 
+  AlertController
 } from 'ionic-angular';
 import {
   CostSplitCalculatorProvider
@@ -16,6 +16,10 @@ import {
 import {
   SummaryPage
 } from '../summary/summary';
+
+import {
+  EditCardPage
+} from '../edit-card/edit-card';
 
 import {
   Reciept
@@ -36,18 +40,18 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, public calcService: CostSplitCalculatorProvider, public alertCtrl: AlertController) {
     this.expenseCards = [{
-      name: 'Person 1',
-      expenses: [{
-        value: 8
-      }]
-    },
-  
-    {
-      name: 'Person 2',
-      expenses: []
-    }
-  
-  ];
+        name: 'Person 1',
+        expenses: [{
+          value: 8
+        }]
+      },
+
+      {
+        name: 'Person 2',
+        expenses: []
+      }
+
+    ];
   };
 
   addNewCard = function () {
@@ -58,18 +62,28 @@ export class HomePage {
     });
   }
 
-  addExpense = function (card) {
-    card.expenses.push({
-      value: null
+  removeCard = function (card) {
+    let confirm = this.alertCtrl.create({
+      title: 'Remove card?',
+      message: 'Do you want to remove this card?',
+      buttons: [{
+          text: 'Cancel'
+        },
+        {
+          text: 'Remove',
+          handler: () => {
+            this.expenseCards.splice(this.expenseCards.indexOf(card), 1);
+          }
+        }
+      ]
     });
+    confirm.present();
   }
 
-  removeCard = function(card) {
-    this.expenseCards.splice(this.expenseCards.indexOf(card), 1);
-  }
-
-  removeExpense = function (card, expenses) {
-    expenses.splice(expenses.indexOf(card), 1);
+  editCard = function (card, expenses) {
+    this.navCtrl.push(EditCardPage, {
+      card
+    });
   }
 
   calculate = function () {
@@ -88,8 +102,8 @@ export class HomePage {
         reciept
       });
 
-    }
-    catch (exception) {
+    } catch (exception) {
+      console.log(exception);
       this.alertCtrl.create({
         title: 'Ooops!',
         subTitle: exception,

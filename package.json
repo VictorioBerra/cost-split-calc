@@ -1,6 +1,6 @@
 {
     "name": "cost-split-calc",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "author": "Ionic Framework",
     "homepage": "http://ionicframework.com/",
     "private": true,
@@ -58,7 +58,7 @@
             "ionic-plugin-keyboard": {},
             "cordova-plugin-ionic": {
                 "APP_ID": "be6a2dea",
-                "CHANNEL_NAME": "Master",
+                "CHANNEL_NAME": "Production",
                 "UPDATE_METHOD": "background",
                 "UPDATE_API": "https://api.ionicjs.com",
                 "MAX_STORE": "2"

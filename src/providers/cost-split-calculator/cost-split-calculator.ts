@@ -18,6 +18,10 @@ export class CostSplitCalculatorProvider {
 
   public Calculate(totalWithTax: number, taxRate: number, expenseCards: ExpenseCard[]): Reciept {
 
+    if (expenseCards.length < 2) {
+      throw new Error(`You need to have at least 2 people to split a bill with.`);
+    }
+
     // Angular returns ngModel bound items as strings.
     expenseCards.forEach(card => card.expenses = card.expenses.filter(expense => {
       if(!_.isNull(expense.value)) {
@@ -36,8 +40,7 @@ export class CostSplitCalculatorProvider {
 
     // Somone entered too many expenses
     if (totalLessAllExpenses < 0) {
-      // TODO: how to handle errors?
-      throw Error(`All individual expenses of $${totalIndividualExpenses} exceeded the before tax total: $${totalWithoutTax}.`);
+      throw new Error(`All individual expenses of $${totalIndividualExpenses} exceeded the before tax total: $${totalWithoutTax}.`);
     }
 
     //let totalTaxCollected: number = totalWithTax - totalWithoutTax;
@@ -62,9 +65,10 @@ export class CostSplitCalculatorProvider {
     reciept.total = _.round(_.sum(_.flatten(recieptItems.map(reciept => reciept.totalOwedWithTax))), 2);
 
     if(reciept.total > totalWithTax) {
-      // Pick lottery winner to get the extra
-      var recieptItem = recieptItems[Math.floor(Math.random()*recieptItems.length)];
-      recieptItem.totalOwedWithTax += (totalWithTax - reciept.total);
+      let overFlow = _.round((totalWithTax - reciept.total), 2);
+      let recieptItem = recieptItems[0];
+      recieptItem.totalOwedWithTax += overFlow;
+      reciept.total += overFlow;
     }
 
     return reciept;

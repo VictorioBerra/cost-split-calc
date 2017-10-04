@@ -6,8 +6,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { MyApp } from './app.component';
+
+// TODO: Lazy load pages
 import { HomePage } from '../pages/home/home';
 import { SummaryPage } from '../pages/summary/summary';
+import { EditCardPage } from '../pages/edit-card/edit-card';
 
 import { CostSplitCalculatorProvider } from '../providers/cost-split-calculator/cost-split-calculator';
 
@@ -15,7 +18,8 @@ import { CostSplitCalculatorProvider } from '../providers/cost-split-calculator/
   declarations: [
     MyApp,
     HomePage,
-    SummaryPage
+    SummaryPage,
+    EditCardPage
   ],
   imports: [
     BrowserModule,
@@ -25,7 +29,8 @@ import { CostSplitCalculatorProvider } from '../providers/cost-split-calculator/
   entryComponents: [
     MyApp,
     HomePage,
-    SummaryPage
+    SummaryPage,
+    EditCardPage
   ],
   providers: [
     StatusBar,

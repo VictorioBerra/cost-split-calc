@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { SummaryPage } from './summary';
+import { EditCardPage } from './edit-card';
 
 @NgModule({
   declarations: [
-    SummaryPage,
+    EditCardPage,
   ],
   imports: [
-    IonicPageModule.forChild(SummaryPage),
+    IonicPageModule.forChild(EditCardPage),
   ],
 })
-export class SummaryPageModule {}
+export class EditCardPageModule {}

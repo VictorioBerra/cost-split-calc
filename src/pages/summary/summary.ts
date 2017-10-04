@@ -2,7 +2,6 @@ import {
   Component
 } from '@angular/core';
 import {
-  IonicPage,
   NavController,
   NavParams
 } from 'ionic-angular';
@@ -13,7 +12,6 @@ import {
   Reciept 
  } from '../../models/reciepts.model';
 
-@IonicPage()
 @Component({
   selector: 'page-summary',
   templateUrl: 'summary.html',

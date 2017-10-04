@@ -7,6 +7,10 @@ page-home {
   ion-content {
     &.cards-bg {
       background-color: #f4f4f7;
+      .total-header {
+        background-color: white;
+        border-bottom:1px solid lightgray;
+      }
     }
   }
 }

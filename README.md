@@ -3,6 +3,6 @@
 ### Todo:
 - Share feature
     - Share with custom message (emoji?)
-    - Shgare per user.
+    - Share per user.
 - Saving and viewing history
 
